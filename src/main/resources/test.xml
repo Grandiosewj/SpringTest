@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean name="student" class="com.test.bean.Student" scope="prototype" autowire="byName">
+        <!--property name="name" value="田所浩二" /-->
+        <property name="age" value="24"/>
+        <!--property name="card" ref="test"/-->
+        <constructor-arg type="java.lang.String" value="田所浩二"/>
+        <property name="score">
+            <map>
+                <entry key="语文" value="114"/>
+                <entry key="数学" value="514"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean name="card" class="com.test.bean.Card" scope="prototype"/>
+    <bean name="test" class="com.test.aop.AopTest"/>
+    <aop:config>
+        <aop:pointcut id="stu" expression="execution(* com.test.bean.Student.say(String))"/>
+        <aop:aspect ref="test">
+            <aop:after-returning method="after" pointcut-ref="stu"/>
+        </aop:aspect>
+        <aop:aspect ref="test">
+            <aop:pointcut id="stu2" expression="@annotation(Deprecated)"/>
+            <aop:before method="before" pointcut-ref="stu2"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
