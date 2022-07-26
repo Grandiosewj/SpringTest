@@ -1,8 +1,10 @@
 package com.test.aop;
 import lombok.extern.java.Log;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.sql.Array;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 @Log
@@ -16,7 +18,9 @@ public class AopTest {
         System.out.println(Arrays.toString(point.getArgs()));
         log.info("我是方法执行之后的日志！");
     }
-    public void around(){
+    public void around(ProceedingJoinPoint joinPoint) throws Throwable{
+        System.out.println("我是qian置！");
+        joinPoint.proceed();
         System.out.println("我是环绕方法！");
     }
 }
