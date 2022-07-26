@@ -19,15 +19,15 @@
 
     <bean name="card" class="com.test.bean.Card" scope="prototype"/>
     <bean name="test" class="com.test.aop.AopTest"/>
+    <bean name="before" class="com.test.aop.AopAdvice"/>
     <aop:config>
-        <aop:pointcut id="stu" expression="execution(* com.test.bean.Student.say(String))"/>
-        <aop:aspect ref="test">
-            <aop:after-returning method="after" pointcut-ref="stu"/>
-        </aop:aspect>
-        <aop:aspect ref="test">
-            <aop:pointcut id="stu2" expression="@annotation(Deprecated)"/>
-            <aop:before method="before" pointcut-ref="stu2"/>
-            <aop:around method="around" pointcut-ref="stu" />
-        </aop:aspect>
+        <!--aop:pointcut id="stu" expression="execution(* com.test.bean.Student.say(String))"/-->
+        <!--aop:aspect ref="test"-->
+            <!--aop:after-returning method="after" pointcut-ref="stu"/-->
+            <aop:pointcut id="stu" expression="@annotation(Deprecated)"/>
+            <!--aop:before method="before" pointcut-ref="stu2"/-->
+            <!--aop:around method="around" pointcut-ref="stu"/-->
+            <aop:advisor advice-ref="before" pointcut-ref="stu"/>
+        <!--/aop:aspect-->
     </aop:config>
 </beans>

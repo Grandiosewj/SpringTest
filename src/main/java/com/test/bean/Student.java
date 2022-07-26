@@ -49,7 +49,8 @@ public class Student {
         this.score = score;
     }
 
-    public void say(String text){
+    public String say(String text){
         System.out.println("我叫"+name+"今年"+age+"岁了，我说："+ text);
+        return text;
     }
 }

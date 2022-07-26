@@ -18,9 +18,10 @@ public class AopTest {
         System.out.println(Arrays.toString(point.getArgs()));
         log.info("我是方法执行之后的日志！");
     }
-    public void around(ProceedingJoinPoint joinPoint) throws Throwable{
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
         System.out.println("我是qian置！");
-        joinPoint.proceed();
+        Object res = joinPoint.proceed();
         System.out.println("我是环绕方法！");
+        return res;
     }
 }
