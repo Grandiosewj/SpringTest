@@ -16,4 +16,7 @@ public class AopTest {
         System.out.println(Arrays.toString(point.getArgs()));
         log.info("我是方法执行之后的日志！");
     }
+    public void around(){
+        System.out.println("我是环绕方法！");
+    }
 }

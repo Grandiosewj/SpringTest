@@ -27,6 +27,7 @@
         <aop:aspect ref="test">
             <aop:pointcut id="stu2" expression="@annotation(Deprecated)"/>
             <aop:before method="before" pointcut-ref="stu2"/>
+            <aop:around method="around" pointcut-ref="stu" />
         </aop:aspect>
     </aop:config>
 </beans>
